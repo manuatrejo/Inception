@@ -1,0 +1,22 @@
+# Secrets and credentials
+db_password.txt
+db_root_password.txt
+*.txt
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+
+# Markdown docs
+BIG_TODOS.md
+Teoría_.md

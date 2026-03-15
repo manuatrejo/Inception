@@ -29,14 +29,14 @@
 - [ ] **1.2.7** Añadir usuario al grupo docker: `usermod -aG docker $USER`
 - [ ] **1.2.8** Verificar que Docker funciona: `docker run hello-world`
 
-### 1.3 Conceptos Básicos de Docker (Investigar)
-- [ ] **1.3.1** ¿Qué es un contenedor? Explica con tus propias palabras
-- [ ] **1.3.2** ¿Qué es una imagen Docker?
-- [ ] **1.3.3** ¿Cuál es la diferencia entre imagen y contenedor?
-- [ ] **1.3.4** ¿Qué es el daemon de Docker?
-- [ ] **1.3.5** ¿Para qué sirve el comando `docker run`?
-- [ ] **1.3.6** ¿Para qué sirve el comando `docker pull`?
-- [ ] **1.3.7** ¿Qué son las capas (layers) de una imagen?
+### 1.3 Conceptos Básicos de Docker
+- [*] **1.3.1** ¿Qué es un contenedor? Explica con tus propias palabras
+- [*] **1.3.2** ¿Qué es una imagen Docker?
+- [*] **1.3.3** ¿Cuál es la diferencia entre imagen y contenedor?
+- [*] **1.3.4** ¿Qué es el daemon de Docker?
+- [*] **1.3.5** ¿Para qué sirve el comando `docker run`?
+- [*] **1.3.6** ¿Para qué sirve el comando `docker pull`?
+- [*] **1.3.7** ¿Qué son las capas (layers) de una imagen?
 - [ ] **1.3.8** Ejecuta `docker run -it debian:bookworm-slim sh` y explora el contenedor
 
 ### 1.4 Comandos Esenciales de Docker
@@ -52,8 +52,8 @@
 - [ ] **1.4.10** Practicar: `docker run -d -p 8080:80 --name test nginx` - crear y ejecutar
 
 ### 1.5 Docker Compose Básico
-- [ ] **1.5.1** ¿Qué es Docker Compose?
-- [ ] **1.5.2** ¿Cuál es la diferencia entre `docker run` y `docker compose`?
+- [*] **1.5.1** ¿Qué es Docker Compose?
+- [*] **1.5.2** ¿Cuál es la diferencia entre `docker run` y `docker compose`?
 - [ ] **1.5.3** Practicar: crear un `docker-compose.yml` básico con nginx
 - [ ] **1.5.4** Practicar: `docker compose up -d`
 - [ ] **1.5.5** Practicar: `docker compose down`
@@ -63,12 +63,12 @@
 - [ ] **1.5.9** Entender la estructura de `docker-compose.yml` (version, services, volumes, networks)
 
 ### 1.6 Redes en Docker
-- [ ] **1.6.1** ¿Qué es el driver bridge?
-- [ ] **1.6.2** ¿Qué es el driver host?
-- [ ] **1.6.3** ¿Por qué está prohibido `network: host` en Inception?
-- [ ] **1.6.4** ¿Qué es el flag `--link` y por qué está prohibido?
-- [ ] **1.6.5** ¿Cómo se comunican los contenedores entre sí?
-- [ ] **1.6.6** ¿Qué es el DNS interno de Docker?
+- [*] **1.6.1** ¿Qué es el driver bridge?
+- [*] **1.6.2** ¿Qué es el driver host?
+- [*] **1.6.3** ¿Por qué está prohibido `network: host` en Inception?
+- [*] **1.6.4** ¿Qué es el flag `--link` y por qué está prohibido?
+- [*] **1.6.5** ¿Cómo se comunican los contenedores entre sí?
+- [*] **1.6.6** ¿Qué es el DNS interno de Docker?
 - [ ] **1.6.7** Practicar: crear dos contenedores en la misma red y hacer ping entre ellos
 - [ ] **1.6.8** Practicar: `docker network ls`
 - [ ] **1.6.9** Practicar: `docker network inspect <network>`
@@ -95,7 +95,7 @@
 - [ ] **2.2.1** ¿Qué es PID 1 en Linux?
 - [ ] **2.2.2** ¿Por qué es importante en contenedores Docker?
 - [ ] **2.2.3** ¿Qué son las señales (SIGTERM, SIGKILL)?
-- [ ] **2.2.4** ¿Qué pasa cuandoenvías SIGTERM a un contenedor?
+- [ ] **2.2.4** ¿Qué pasa cuando envías SIGTERM a un contenedor?
 - [ ] **2.2.5** ¿Por qué `tail -f` no funciona correctamente?
 - [ ] **2.2.6** ¿Por qué `sleep infinity` no funciona correctamente?
 - [ ] **2.2.7** ¿Por qué `bash` como CMD no funciona bien?
@@ -385,7 +385,7 @@
 
 ### 10.2 Puerto 443
 - [ ] **10.2.1** ¿Por qué solo puerto 443?
-- [ ] **10.2.2** ¿Qué pasa siintentas acceder por HTTP?
+- [ ] **10.2.2** ¿Qué pasa si intentas acceder por HTTP?
 - [ ] **10.2.3** Configurar redirects si es necesario
 
 ---
