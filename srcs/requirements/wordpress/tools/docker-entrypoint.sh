@@ -13,7 +13,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
     mkdir -p /var/www/html
     cd /var/www/html
     curl -sL https://wordpress.org/latest.tar.gz | tar xz --strip-components=1
-    chown -R nginx:nginx /var/www/html
+    chown -R www-data:www-data /var/www/html
 fi
 
 if [ ! -f "/var/www/html/wp-config.php" ]; then
@@ -26,8 +26,8 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
     sed -i "s/password_here/$MYSQL_PASSWORD/g" /var/www/html/wp-config.php
     sed -i "s/localhost/$MYSQL_HOST/g" /var/www/html/wp-config.php
     
-    chown nginx:nginx /var/www/html/wp-config.php
+    chown www-data:www-data /var/www/html/wp-config.php
 fi
 
 echo "Starting PHP-FPM..."
-exec php-fpm
+exec /usr/sbin/php-fpm83
