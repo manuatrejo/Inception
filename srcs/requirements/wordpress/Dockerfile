@@ -5,7 +5,9 @@ RUN apk add --no-cache \
     php-xml php-json php-zlib php-openssl curl && \
     adduser -D -G www-data -g 'WordPress' -s /bin/sh www-data
 
-RUN mkdir -p /var/www/html /run/php
+RUN mkdir -p /var/www/html /run/php /etc/php83/php-fpm.d
+
+COPY conf/www.conf /etc/php83/php-fpm.d/www.conf
 
 COPY tools/docker-entrypoint.sh /docker-entrypoint.sh
 
