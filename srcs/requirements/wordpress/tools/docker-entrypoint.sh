@@ -30,4 +30,4 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 fi
 
 echo "Starting PHP-FPM..."
-exec /usr/sbin/php-fpm83
+exec "$@"
