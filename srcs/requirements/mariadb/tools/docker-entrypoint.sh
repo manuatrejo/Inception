@@ -26,12 +26,14 @@ for i in $(seq 1 30); do
 done
 
 echo "Creating database and users..."
-if [ -n "$MYSQL_ROOT_PASSWORD" ]; then
+if [ -n "$MYSQL_PASSWORD" ]; then
     mysql -u root <<-EOSQL
         CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
         CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+        ALTER USER IF EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
         GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
         CREATE USER IF NOT EXISTS 'maanguit'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+        ALTER USER IF EXISTS 'maanguit'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
         GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO 'maanguit'@'%';
         FLUSH PRIVILEGES;
 EOSQL
