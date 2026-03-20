@@ -8,7 +8,6 @@ RUN mkdir -p /etc/nginx/ssl && \
     -subj "/C=ES/ST=Madrid/L=Madrid/O=42/OU=Inception/CN=maanguit.42.fr"
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY conf/default.conf /etc/nginx/http.d/default.conf
 
 RUN mkdir -p /var/www/html
 

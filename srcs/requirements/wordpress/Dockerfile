@@ -2,7 +2,7 @@ FROM alpine:3.22
 
 RUN apk add --no-cache \
     php-fpm php-mysqli php-curl php-gd php-mbstring \
-    php-xml php-json php-zlib php-openssl curl && \
+    php-xml php-json php-zlib php-openssl php83-pecl-redis curl && \
     adduser -D -G www-data -g 'WordPress' -s /bin/sh www-data
 
 RUN mkdir -p /var/www/html /run/php /etc/php83/php-fpm.d

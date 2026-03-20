@@ -37,6 +37,14 @@ if [ ! -f "/var/www/html/wp-config.php" ] || [ "$RECONFIGURE" = "1" ]; then
     sed -i "s|define.*'DB_PASSWORD'.*;|define( 'DB_PASSWORD', '${MYSQL_PASSWORD}' );|g" /var/www/html/wp-config.php
     sed -i "s|define.*'DB_HOST'.*;|define( 'DB_HOST', '${MYSQL_HOST}' );|g" /var/www/html/wp-config.php
 
+    if ! grep -q "WP_REDIS_HOST" /var/www/html/wp-config.php; then
+        cat >> /var/www/html/wp-config.php << 'EOF'
+define( 'WP_REDIS_HOST', 'redis' );
+define( 'WP_REDIS_PORT', 6379 );
+define( 'WP_CACHE', true );
+EOF
+    fi
+
     chown www-data:www-data /var/www/html/wp-config.php
 fi
 

@@ -32,6 +32,8 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
+      redis:
+        condition: service_started
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -50,6 +52,74 @@ services:
     depends_on:
       - wordpress
 
+  static:
+    build: ./requirements/bonus/static
+    container_name: static
+    restart: unless-stopped
+    networks:
+      - inception
+    ports:
+      - "${STATIC_PORT:-8081}:80"
+
+  redis:
+    build: ./requirements/bonus/redis
+    container_name: redis
+    restart: unless-stopped
+    networks:
+      - inception
+
+  adminer:
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    restart: unless-stopped
+    networks:
+      - inception
+    ports:
+      - "${ADMINER_PORT:-8080}:8080"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  ftp:
+    build: ./requirements/bonus/ftp
+    container_name: ftp
+    restart: unless-stopped
+    networks:
+      - inception
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "${FTP_PORT:-21}:21"
+      - "${FTP_PASV_MIN_PORT:-21000}-${FTP_PASV_MAX_PORT:-21010}:${FTP_PASV_MIN_PORT:-21000}-${FTP_PASV_MAX_PORT:-21010}"
+    environment:
+      - FTP_USER=${FTP_USER}
+      - FTP_PASV_ADDRESS=${FTP_PASV_ADDRESS}
+      - FTP_PASV_MIN_PORT=${FTP_PASV_MIN_PORT}
+      - FTP_PASV_MAX_PORT=${FTP_PASV_MAX_PORT}
+    secrets:
+      - ftp_password
+    depends_on:
+      - wordpress
+
+  backup:
+    build: ./requirements/bonus/backup
+    container_name: backup
+    restart: unless-stopped
+    networks:
+      - inception
+    volumes:
+      - db_backups:/backups
+    environment:
+      - MYSQL_HOST=mariadb
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - BACKUP_RETENTION_DAYS=${BACKUP_RETENTION_DAYS}
+    secrets:
+      - db_password
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
 volumes:
   db_data:
     driver: local
@@ -65,11 +135,20 @@ volumes:
       o: bind
       device: /home/maanguit/data/website
 
+  db_backups:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/maanguit/data/backups
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
   db_root_password:
     file: ../secrets/db_root_password.txt
+  ftp_password:
+    file: ../secrets/ftp_password.txt
 
 networks:
   inception:

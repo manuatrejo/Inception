@@ -3,6 +3,11 @@ set -e
 
 echo "Initializing MariaDB..."
 
+echo "Fixing data directory ownership..."
+mkdir -p /run/mysqld /var/lib/mysql
+chown -R mysql:mysql /run/mysqld /var/lib/mysql
+chmod 750 /var/lib/mysql
+
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Creating database structure..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
